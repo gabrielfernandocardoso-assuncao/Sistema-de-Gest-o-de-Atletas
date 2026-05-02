@@ -59,3 +59,8 @@ criando projetos para treinar flask e demonstrar conhecimento
     7. Criar os formularios no forms -> no forms.py criar a classe dos formularios e importalos no init.py
     8. Criar a homepage, que vai ser a pagina de login no template e definir a rota na view.
     9. Depois de definir o models, ajustar os 2 imports no final da pagina __init__.py.
+
+# criando as paginas(templates)
+    1. Na pasta templates, vou criar as paginas principais... (futuramente implemento mais)
+    2. criar um base.html pra ser o "pai" das outras pastas "filhos"
+    3. Criar o "homepage", por padrao a pagina de login

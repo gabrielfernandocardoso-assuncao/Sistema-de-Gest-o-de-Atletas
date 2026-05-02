@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block titulo%} Menu {% endblock %}
+
+{% block content %}
+    {% include 'cabecalho.html' %}
+    
+    <hr>
+    <form action="" method="get">
+        <div class="row">
+            <div class="col-6">
+                <input type="text" name="pesquisa" class="form-control" placeholder="Escreva aqui para pesquisar..." >
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-primary w-50">Pesquisar</button>
+            </div>
+        </div>
+    </form>
+    <!-- resposta do form get -->
+{% endblock %}

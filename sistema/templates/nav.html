@@ -1,0 +1,5 @@
+<a href="{{ url_for('Menu') }}" class="btn btn-secondary col-1">Menu</a>
+<a href="{{ url_for('Perfil') }}" class="btn btn-secondary col-1">Perfil</a>
+{% if current_user.is_athenticaded %}
+    <a href="{{ url_for('Login')}}" class="btn btn-secondary col-1">Sair</a>
+{% endif %}

@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block titulo%} Menu {% endblock %}
+
+{% block content %}
+    {% include 'cabecalho.html' %}
+    
+    <hr>
+    <!-- padrao de toda pagina -->
+
+    <div class="row justify-content-center" >
+        <div class="card mt-5" style="width: 26rem;">
+            <div class="card-body text-center">
+                <h5 class="card-title text-success ">Escolha uma opção:</h5>
+                <div class="card-body text-center">
+                    <!-- A ROW cria a linha. justify-content-center centraliza as colunas se sobrarem espaços -->
+                    <div class="row justify-content-center mt-4">
+                        
+                        <!-- Primeira Coluna (6 unidades de largura) -->
+                        <div class="col-6 d-grid gap-2">
+                            <!-- botao para cadastrar Atleta -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro">
+                                Registrar Atleta
+                            </button>
+                            <!-- modal registro de Atleta -->
+                            <div class="modal fade" id="cadastro" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Cabeçalho -->
+                                        <div class="modal-header bg-primary">
+                                            <h5>Cadastre o Atleta...</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+
+                                        <!-- corpo do modal -->
+                                        <div class="modal-body">
+                                            <!-- colocar o formulario -->
+                                        </div>
+
+                                        <!-- rodapé -->
+                                        <div class="modal-footer bg-secondary">
+                                            <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- botao registro do plano -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_plano">
+                                Registrar Plano
+                            </button>
+
+                            <!-- modal -->
+                            <div class="modal fade" id="cadastro_plano" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Cabeçalho -->
+                                         <div class="modal-header bg-primary">
+                                            <h5>Faça um Plano...</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                         </div>
+
+                                        <!-- corpo do modal -->
+                                        <div class="modal-body">
+                                            <!-- colocar formulario -->
+                                        </div>
+
+                                        <!-- rodapé -->
+                                        <div class="modal-footer bg-secondary">
+                                            <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Segunda Coluna (6 unidades de largura) -->
+                        <div class="col-6 d-grid gap-2">
+                            <!-- botao de registrar Exercício -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_exercicio">
+                                Registrar Exercício
+                            </button>
+
+                            <!-- modal -->
+                            <div class="modal fade" id="cadastro_exercicio" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Cabeçalho -->
+                                        <div class="modal-header bg-primary">
+                                            <h5>Registre um Exercício...</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+
+                                        <!-- corpo do modal -->
+                                        <div class="modal-body">
+                                            <!-- colocar formulario -->
+                                        </div>
+
+                                        <!-- rodapé -->
+                                        <div class="modal-footer bg-secondary">
+                                            <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- rota para ver a Evolução -->
+                            <a href="{{ url_for('Evolucao')}}" class="btn btn-primary">Ver Evolução</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

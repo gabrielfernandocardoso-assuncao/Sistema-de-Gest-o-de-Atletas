@@ -62,7 +62,8 @@ login_manager.login_view = 'login' # alterar para pagina onde vai ter o login
 app.config['UPLOAD_FILE'] = r"static/data"
 
 # caso der erro de url importar a rota
-from sistema.views import homepage # importar no final para nao gerar erro
+from sistema.views import Login # alterar para rota principal
+# importar no final para nao gerar erro
 
 # importanto a tabela 
 from sistema.models import Atleta # importar a tabela do models

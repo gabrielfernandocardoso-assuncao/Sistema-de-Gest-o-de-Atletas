@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Login {% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-12 shadow mt-5">
+            <div class="col-12 rounded mt-5" style="background-color: gray;">
+                <h1 style="text-align: center;" class="m-1" >Login</h1>
+            </div>
+        </div>
+        <div class="col-12">
+            <!-- colocar o formulario -->
+        </div>
+        
+        <hr>
+
+        <!-- botão de cadastro -->
+        <div class="footer">
+            <button type="button" class="col-1 btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro">
+                Cadastrar
+            </button>
+        </div>
+
+        <!-- modal -->
+        <div class="modal fade" id="cadastro" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Cabeçalho do modal -->
+                    <div class="modal-header bg-primary">
+                        <h5>Faça seu Cadastro...</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- corpo do modal -->
+                    <div class="modal-body">
+                        <!-- colocar o formulario -->
+                    </div>
+
+                    <!-- rodapé do modal -->
+                    <div class="modal-footer bg-secondary">
+                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        
+    </div>
+{% endblock %}
