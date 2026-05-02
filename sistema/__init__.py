@@ -65,4 +65,4 @@ app.config['UPLOAD_FILE'] = r"static/data"
 from sistema.views import homepage # importar no final para nao gerar erro
 
 # importanto a tabela 
-from sistema.models import Atletas # importar a tabela do models
+from sistema.models import Atleta # importar a tabela do models
