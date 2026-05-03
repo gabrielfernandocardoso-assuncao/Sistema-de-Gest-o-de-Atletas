@@ -23,8 +23,8 @@ from werkzeug.utils import secure_filename
 # formulario de cadastro
 class CadastroForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired()])
-    sobrenome = StringField('Nome', validators=[DataRequired()])
-    email = EmailField('Email', validators=[DataRequired(), Email])
+    sobrenome = StringField('Sobrenome', validators=[DataRequired()])
+    email = EmailField('Email', validators=[DataRequired(), Email()])
     senha = PasswordField('Senha', validators=[DataRequired()])
     confirmacao_senha = PasswordField('Confirmar Senha', validators=[DataRequired(), EqualTo('senha')])
     btnsubmit = SubmitField('Salvar')
@@ -161,3 +161,31 @@ class RegistroEvolucaoForm(FlaskForm):
 
         # salvando a sessao
         db.session.commit()
+
+# criar o form de alterar credencias
+class AlterarCredenciaisForm(FlaskForm):
+    nome = StringField('Novo Nome', validators=[DataRequired()])
+    sobrenome = StringField('Novo Sobrenome', validators=[DataRequired()])
+    email = EmailField('Novo E-mail', validators=[DataRequired(), Email()])
+    senha = StringField('Nova Senha')
+    confirmar_senha = StringField('Confirmar a Senha', validators=[EqualTo('senha')])
+    foto_perfil = FileField('Foto de Perfil', validators=[DataRequired(), FileAllowed(['png', 'jpg', 'jpeg']) ])
+    btnsubmit = SubmitField('Alterar')
+
+    def salvar_foto(self, usuario):
+        foto = self.foto_perfil.data
+        extensao = os.path.splitext(foto.filename)[1]
+        nome_arquivo = f"usuario_{usuario.id}{extensao}"
+        
+        # Caminho absoluto para garantir que o SO encontre a pasta
+        caminho_diretorio = os.path.join(app.root_path, 'static', 'foto_perfil')
+        
+        # Cria a pasta caso ela não exista para evitar erro de "Folder not found"[cite: 17]
+        if not os.path.exists(caminho_diretorio):
+            os.makedirs(caminho_diretorio)
+            
+        caminho_completo = os.path.join(caminho_diretorio, nome_arquivo)
+        
+        # Salva o arquivo e atualiza o banco[cite: 17, 18]
+        foto.save(caminho_completo)
+        usuario.foto_perfil = nome_arquivo

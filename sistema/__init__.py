@@ -64,7 +64,7 @@ bcrypt = Bcrypt()
 login_manager.login_view = 'login' # alterar para pagina onde vai ter o login
 
 # configurando para receber os uploads
-app.config['UPLOAD_FILE'] = r"static/data"
+app.config['UPLOAD_FILE'] = r"static/foto_perfil"
 
 # caso der erro de url importar a rota
 from sistema.views import Login # alterar para rota principal

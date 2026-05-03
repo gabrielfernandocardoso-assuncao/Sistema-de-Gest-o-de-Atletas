@@ -1,10 +1,100 @@
 {% extends 'base.html' %}
 
 {% block titulo%} Menu {% endblock %}
-
+<!-- {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %} -->
 {% block content %}
     {% include 'cabecalho.html' %}
     
     <hr>
+    
+    <div class="row justify-content-center">
+        <div class="card" style="width: 40rem; height: auto;">
+            <div class="card-body" style="background-color: gray;">
+                <!-- nome do usuario -->
+                <h5 class="card-title text-center fs-3">{{ current_user.nome.capitalize() }} {{ current_user.sobrenome.capitalize() }}</h5>
 
+                <hr>
+
+                <div class="col-12 text-center">
+                    <!-- imagem de perfil do usuario -->
+                    <img src="{{ url_for('static', filename='foto_perfil/' ~ (current_user.foto_perfil or 'default.png')) }}" 
+                        alt="Foto de Perfil" 
+                        class="rounded-circle" 
+                        style="width: 150px;">
+                 </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-12">
+                        <span class="fs-3">Email: </span>
+                        <input type="text" readonly placeholder="{{ current_user.email }}" class="form-control fs-5">
+                        <button type="button" class="btn btn-primary w-100 mt-4" data-bs-toggle="modal" data-bs-target="#alterar_senha">
+                            Alterar Informações
+                        </button>
+
+                        <!-- modal -->
+                        <div class="modal fade" id="alterar_senha" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- cabeçalho -->
+                                    <div class="modal-header bg-primary">
+                                        <h5>Alterando Crendenciais...</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- corpo do modal -->
+                                    <div class="modal-body">
+                                        <!-- formulario de alteração -->
+                                        <form action="" method="post" enctype="multipart/form-data">
+                                            {{ form.csrf_token }}
+
+                                            <!-- 1 -->
+                                            {{ form.nome.label() }}
+                                            {{ form.nome(class="form-control") }}
+
+                                            <!-- 2 -->
+                                            {{ form.sobrenome.label() }}
+                                            {{ form.sobrenome(class="form-control") }}
+
+                                            <!-- 3 -->
+                                            {{ form.email.label() }}
+                                            {{ form.email(class="form-control") }}
+
+                                            <!-- 4 -->
+                                            {{ form.senha.label() }}
+                                            {{ form.senha(class="form-control") }}
+
+                                            <!-- 5 -->
+                                            {{ form.confirmar_senha.label() }}
+                                            {{ form.confirmar_senha(class="form-control") }}
+
+                                            <!-- 6 -->
+                                            {{ form.foto_perfil.label() }}
+                                            {{ form.foto_perfil(class="form-control") }}
+
+                                            <!-- 7 -->
+                                            {{ form.btnsubmit(class="btn btn-primary mt-4 w-100") }}
+                                        
+                                            
+                                        </form>
+                                    </div>
+                                    <!-- rodapé -->
+                                    <div class="modal-footer bg-secondary">
+                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -9,15 +9,26 @@
             </div>
         </div>
         <div class="col-12">
-            <!-- colocar o formulario -->
-             
+            <form action="" method="post">
+                <!-- colocar o formulario -->
+                {{ form_login.csrf_token }}
+
+                {{ form_login.email.label(class="fs-5") }}
+                {{ form_login.email(class="form-control")}}
+
+                {{ form_login.senha.label(class="fs-5") }}
+                {{ form_login.senha(class="form-control")}}
+
+                {{ form_login.btnsubmit(class="btn btn-primary mt-4 w-100") }}
+            </form>
         </div>
         
         <hr>
 
         <!-- botão de cadastro -->
         <div class="footer">
-            <button type="button" class="col-1 btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro">
+            <span class="fs-5">Não tem cadastro?</span>
+            <button type="button" class="col-1 btn btn-primary " data-bs-toggle="modal" data-bs-target="#cadastro">
                 Cadastrar
             </button>
         </div>
@@ -34,7 +45,27 @@
 
                     <!-- corpo do modal -->
                     <div class="modal-body">
-                        <!-- colocar o formulario -->
+                        <form action="" method="post">
+                            <!-- colocar o formulario -->
+                            {{ form_cadastro.csrf_token }}
+
+                            {{ form_cadastro.nome.label(class="fs-5") }}
+                            {{ form_cadastro.nome(class="form-control") }}
+
+                            {{ form_cadastro.sobrenome.label(class="fs-5") }}
+                            {{ form_cadastro.sobrenome(class="form-control") }}
+
+                            {{ form_cadastro.email.label(class="fs-5") }}
+                            {{ form_cadastro.email(class="form-control") }}
+
+                            {{ form_cadastro.senha.label(class="fs-5") }}
+                            {{ form_cadastro.senha(class="form-control") }}
+
+                            {{ form_cadastro.confirmacao_senha.label(class="fs-5") }}
+                            {{ form_cadastro.confirmacao_senha(class="form-control") }}
+
+                            {{ form_cadastro.btnsubmit(class="btn btn-primary mt-4 w-100") }}
+                        </form>
                     </div>
 
                     <!-- rodapé do modal -->

@@ -6,15 +6,84 @@
     {% include 'cabecalho.html' %}
     
     <hr>
+
+    <!-- formulario get -->
     <form action="" method="get">
         <div class="row">
             <div class="col-6">
-                <input type="text" name="pesquisa" class="form-control" placeholder="Escreva aqui para pesquisar..." >
+                <input type="text" name="busca" class="form-control" placeholder="Escreva aqui para pesquisar..." >
             </div>
             <div class="col-6">
                 <button type="button" class="btn btn-primary w-50">Pesquisar</button>
             </div>
         </div>
     </form>
+    <!-- formulario post -->
+    <form action="" method="post" class="mt-4">
+        <!-- botao para registrar o treino -->
+        <span class="fs-5 fw-bold">Faça o registro do treino -></span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registrar">
+            Registrar Evolucao
+        </button>
+        <!-- modal registro treino -->
+        <div class="modal fade" id="registrar" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- cabeçalho -->
+                    <div class="modal-header bg-primary">
+                        <h5>Registrando o Treino...</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <!-- corpo do modal -->
+                    <div class="modal-body">]
+                        <!-- colocar o formulario -->
+                        {{ form.csrf_token }}
+
+                        {{ form.carga.label() }}
+                        {{ form.carga(class="form-control")}}
+
+                        {{ form.repeticoes.label() }}
+                        {{ form.repeticoes(class="form-control")}}
+
+                        {{ form.id_atleta.label() }}
+                        {{ form.id_atleta(class="form-control")}}
+
+                        {{ form.id_exercicio.label() }}
+                        {{ form.id_exercicio(class="form-control")}}
+
+                        {{ form.btnsubmit(class="btn btn-primary mt-4 w-100")}}
+                    </div>
+
+                    <!-- rodapé -->
+                    <div class="modal-footer bg-secondary">
+                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
     <!-- resposta do form get -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome Atleta</th>
+                <th>Exercício</th>
+                <th>Carga</th>
+                <th>Repetições</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for linha in context['dados'] %}
+            <tr>
+                <td>{{ linha.registro_dono['nome'] }}</td>
+                <td>{{ linha.exercicio_dono['nome_exercicio']}}</td>
+                <td>{{ linha.carga_kg }}</td>
+                <td>{{ linha.repeticoes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

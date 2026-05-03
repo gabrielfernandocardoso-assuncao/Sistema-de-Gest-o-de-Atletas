@@ -12,6 +12,7 @@ def load_user(user_id):
 
 class Usuario(db.Model, UserMixin): # essa tabela vai ter o login
     id = db.Column(db.Integer, primary_key = True) 
+    foto_perfil = db.Column(db.String, nullable = True, default='default.png') # adicionei o campo foto de perfil
     nome = db.Column(db.String, nullable = True)
     sobrenome = db.Column(db.String, nullable = True)
     email = db.Column(db.String, nullable = True, unique = True)
