@@ -2,7 +2,7 @@
 from flask_wtf import FlaskForm
 
 # importando o tipo de campo e os validators
-from wtforms import StringField, EmailField, PasswordField, SubmitField, PasswordField, DateField, FloatField, IntegerField
+from wtforms import StringField, EmailField, PasswordField, SubmitField, PasswordField, DateField, FloatField, IntegerField, SelectField
 
 # importando os campos de arquivo
 from flask_wtf.file import FileField, FileAllowed
@@ -23,7 +23,7 @@ from werkzeug.utils import secure_filename
 # cadastrar atleta
 class CadastroAtletaForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired()])
-    posicao = StringField('Posição', validators=[DataRequired()])
+    posicao = SelectField('Posição', choices=[('armador', 'Armador'), ('ala', 'Ala'), ('pivo', 'Pivô'), ('ala_armador', 'Ala-Armador'), ('ala_pivo', 'Ala-Pivô')])
     data_nascimento = DateField('Data de nascimento', validators=[DataRequired()])
     peso_atual = FloatField('Peso', validators=[DataRequired()])
     altura = FloatField('Altura', validators=[DataRequired()]) 
@@ -69,7 +69,7 @@ class PlanoTreinoForm(FlaskForm):
 # criar registro de exercicio
 class ExercicioForm(FlaskForm):
     nome_exercicio = StringField('Nome do Exercicio', validators=[DataRequired()])
-    categoria = StringField('Categoria', validators=[DataRequired()])
+    categoria = SelectField('Categoria', choices=[('hipertrofia', 'Hipertrofia'), ('forca_maxima', 'Força Máxima'), ('resistencia_muscular', 'Resistência Muscular'), ('funcional', 'Funcional'), ('hiit', 'HIIT'), ('cardio_aerobico', 'Cardio/Aeróbico')])
     btnsubmit = SubmitField('Registrar')
 
     def save(self):
@@ -94,7 +94,7 @@ class RegistroEvolucaoForm(FlaskForm):
 
     def save(self):
         registroevolucao = RegistroEvolucao(
-            carga = self.carga.data,
+            carga_kg = self.carga.data,
             repeticoes = self.repeticoes.data,
             id_atleta = self.id_atleta.data,
             id_exercicio = self.id_exercicio.data

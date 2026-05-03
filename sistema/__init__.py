@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 
 # importando a biblioteca os
 import os # serve de interação, é necessario
+from pathlib import Path
 
 # carregando a biblioteca de ambiente virtual
 from dotenv import load_dotenv
@@ -19,8 +20,14 @@ from flask_bcrypt import Bcrypt
 # startando o aplicativo
 app = Flask(__name__) # ele vai iniciar o aplicativo com base nesse arquivo.
 
+# definindo o caminho absoluto
+# Isso define o caminho da pasta raiz do seu projeto
+basedir = os.path.abspath(os.path.dirname(__file__))
+# Sobe um nível para sair da pasta 'sistema' e chegar na raiz
+root_path = Path(basedir).parent
+
 # definindo o banco de dados
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI') # acessando variavel do ambiente virtual
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI').replace('instance', os.path.join(root_path, 'instance')) # acessando variavel do ambiente virtual
 
 # verificador do banco de dados 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -39,12 +46,10 @@ convention = {
     "pk": "pk_%(table_name)s"
 }
 
+# definindo a variavel do banco de dados
 # Inicialize o db passando essa convenção
 metadata = MetaData(naming_convention=convention)
-db = SQLAlchemy(metadata=metadata)
-
-# definindo a variavel do banco de dados
-db = SQLAlchemy(app)
+db = SQLAlchemy(app, metadata=metadata)
 
 # definindo o app de migrate
 migrate = Migrate(app, db)

@@ -1,8 +1,8 @@
-"""Criei o banco de dados
+"""ajuste
 
-Revision ID: f10511572321
+Revision ID: bf60629b28f5
 Revises: 
-Create Date: 2026-05-01 22:00:58.195043
+Create Date: 2026-05-02 22:27:21.212935
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f10511572321'
+revision = 'bf60629b28f5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,7 +22,7 @@ def upgrade():
     sa.Column('id_exercicio', sa.Integer(), nullable=False),
     sa.Column('nome_exercicio', sa.String(), nullable=True),
     sa.Column('categoria', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id_exercicio')
+    sa.PrimaryKeyConstraint('id_exercicio', name=op.f('pk_exercicio'))
     )
     op.create_table('usuario',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -30,8 +30,8 @@ def upgrade():
     sa.Column('sobrenome', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('senha', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email')
+    sa.PrimaryKeyConstraint('id', name=op.f('pk_usuario')),
+    sa.UniqueConstraint('email', name=op.f('uq_usuario_email'))
     )
     op.create_table('atleta',
     sa.Column('id_atleta', sa.Integer(), nullable=False),
@@ -41,16 +41,16 @@ def upgrade():
     sa.Column('peso_atual', sa.Float(), nullable=True),
     sa.Column('altura', sa.Float(), nullable=True),
     sa.Column('user', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['user'], ['usuario.id'], ),
-    sa.PrimaryKeyConstraint('id_atleta')
+    sa.ForeignKeyConstraint(['user'], ['usuario.id'], name=op.f('fk_atleta_user_usuario')),
+    sa.PrimaryKeyConstraint('id_atleta', name=op.f('pk_atleta'))
     )
     op.create_table('plano_treino',
     sa.Column('id_plano', sa.Integer(), nullable=False),
     sa.Column('nome_plano', sa.String(), nullable=True),
     sa.Column('objetivo', sa.String(), nullable=True),
     sa.Column('id_atleta', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['id_atleta'], ['atleta.id_atleta'], ),
-    sa.PrimaryKeyConstraint('id_plano')
+    sa.ForeignKeyConstraint(['id_atleta'], ['atleta.id_atleta'], name=op.f('fk_plano_treino_id_atleta_atleta')),
+    sa.PrimaryKeyConstraint('id_plano', name=op.f('pk_plano_treino'))
     )
     op.create_table('registro_evolucao',
     sa.Column('id_registro', sa.Integer(), nullable=False),
@@ -59,9 +59,9 @@ def upgrade():
     sa.Column('repeticoes', sa.SmallInteger(), nullable=True),
     sa.Column('id_atleta', sa.Integer(), nullable=True),
     sa.Column('id_exercicio', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['id_atleta'], ['atleta.id_atleta'], ),
-    sa.ForeignKeyConstraint(['id_exercicio'], ['exercicio.id_exercicio'], ),
-    sa.PrimaryKeyConstraint('id_registro')
+    sa.ForeignKeyConstraint(['id_atleta'], ['atleta.id_atleta'], name=op.f('fk_registro_evolucao_id_atleta_atleta')),
+    sa.ForeignKeyConstraint(['id_exercicio'], ['exercicio.id_exercicio'], name=op.f('fk_registro_evolucao_id_exercicio_exercicio')),
+    sa.PrimaryKeyConstraint('id_registro', name=op.f('pk_registro_evolucao'))
     )
     # ### end Alembic commands ###
 
