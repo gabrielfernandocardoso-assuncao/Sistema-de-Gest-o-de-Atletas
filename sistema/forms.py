@@ -12,7 +12,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 
 # importando as tabelas e o db
 from sistema import db, bcrypt, app
-from sistema.models import Atleta # importar as tabelas do models
+from sistema.models import Atleta, PlanoTreino, RegistroEvolucao, Exercicio, Usuario  # importar as tabelas do models
 
 # biblioteca usada pra salvar arquivo 
 import os
@@ -21,28 +21,87 @@ import os
 from werkzeug.utils import secure_filename
 
 # cadastrar atleta
-class CadastroAtleta(FlaskForm):
+class CadastroAtletaForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired()])
     posicao = StringField('Posição', validators=[DataRequired()])
     data_nascimento = DateField('Data de nascimento', validators=[DataRequired()])
-    peso = FloatField('Peso', validators=[DataRequired()])
+    peso_atual = FloatField('Peso', validators=[DataRequired()])
     altura = FloatField('Altura', validators=[DataRequired()]) 
+    btnsubmit = SubmitField('Registrar')
+
+    # funçao de salvar
+    def save(self):
+        atleta = Atleta(
+            nome = self.nome.data,
+            posicao = self.posicao.data,
+            data_nascimento = self.data_nascimento.data,
+            peso_atual = self.peso_atual.data,
+            altura = self.altura.data
+        )
+
+        # abrindo uma sessao
+        db.session.add(atleta) # passando a variavel criada
+
+        # salvando a sessao
+        db.session.commit()
+
 
 # criar plano de treino
-class PlanoTreino(FlaskForm):
+class PlanoTreinoForm(FlaskForm):
     nome_plano = StringField('Nome do plano', validators=[DataRequired()])
     objetivo = StringField('Objetivo', validators=[DataRequired()])
     id_atleta = IntegerField('ID do Dono', validators=[DataRequired()])
+    btnsubmit = SubmitField('Registrar')
+
+    def save(self):
+        planotreino = PlanoTreino(
+            nome_plano = self.nome_plano.data,
+            objetivo = self.objetivo.data,
+            id_atleta = self.id_atleta.data,
+        )
+
+        # abrindo uma sessao
+        db.session.add(planotreino) # passando a variavel criada
+
+        # salvando a sessao
+        db.session.commit()
 
 # criar registro de exercicio
-class Exercicio(FlaskForm):
+class ExercicioForm(FlaskForm):
     nome_exercicio = StringField('Nome do Exercicio', validators=[DataRequired()])
     categoria = StringField('Categoria', validators=[DataRequired()])
-    
+    btnsubmit = SubmitField('Registrar')
+
+    def save(self):
+        exercicio = Exercicio(
+            nome_exercicio = self.nome_exercicio.data,
+            categoria = self.categoria.data
+        )
+
+        # abrindo uma sessao
+        db.session.add(exercicio) # passando a variavel criada
+
+        # salvando a sessao
+        db.session.commit()
+
 # criar o registro de evolução
-class RegistroEvolucao(FlaskForm):
+class RegistroEvolucaoForm(FlaskForm):
     carga = IntegerField('Carga em KG', validators=[DataRequired()])
     repeticoes = IntegerField('Repetições', validators=[DataRequired()])
     id_atleta = IntegerField('Id do atleta', validators=[DataRequired()])
     id_exercicio = IntegerField('Id do exercicio', validators=[DataRequired()])
+    btnsubmit = SubmitField('Registrar')
 
+    def save(self):
+        registroevolucao = RegistroEvolucao(
+            carga = self.carga.data,
+            repeticoes = self.repeticoes.data,
+            id_atleta = self.id_atleta.data,
+            id_exercicio = self.id_exercicio.data
+        )
+
+        # abrindo uma sessao
+        db.session.add(registroevolucao) # passando a variavel criada
+
+        # salvando a sessao
+        db.session.commit()

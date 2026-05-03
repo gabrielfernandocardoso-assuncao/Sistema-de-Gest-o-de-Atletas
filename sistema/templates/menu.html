@@ -10,105 +10,153 @@
 
     <div class="row justify-content-center" >
         <div class="card mt-5" style="width: 26rem;">
-            <div class="card-body text-center">
+            <div class="card-body ">
                 <h5 class="card-title text-success ">Escolha uma opção:</h5>
-                <div class="card-body text-center">
-                    <!-- A ROW cria a linha. justify-content-center centraliza as colunas se sobrarem espaços -->
-                    <div class="row justify-content-center mt-4">
-                        
-                        <!-- Primeira Coluna (6 unidades de largura) -->
-                        <div class="col-6 d-grid gap-2">
-                            <!-- botao para cadastrar Atleta -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro">
-                                Registrar Atleta
-                            </button>
-                            <!-- modal registro de Atleta -->
-                            <div class="modal fade" id="cadastro" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <!-- Cabeçalho -->
-                                        <div class="modal-header bg-primary">
-                                            <h5>Cadastre o Atleta...</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-
-                                        <!-- corpo do modal -->
-                                        <div class="modal-body">
-                                            <!-- colocar o formulario -->
-                                        </div>
-
-                                        <!-- rodapé -->
-                                        <div class="modal-footer bg-secondary">
-                                            <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                        </div>
+                <!-- A ROW cria a linha. justify-content-center centraliza as colunas se sobrarem espaços -->
+                <div class="row justify-content-center mt-4">
+                    
+                    <!-- Primeira Coluna (6 unidades de largura) -->
+                    <div class="col-6 d-grid gap-2">
+                        <!-- botao para cadastrar Atleta -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro">
+                            Registrar Atleta
+                        </button>
+                        <!-- modal registro de Atleta -->
+                        <div class="modal fade" id="cadastro" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Cabeçalho -->
+                                    <div class="modal-header bg-primary">
+                                        <h5>Cadastre o Atleta...</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
-                                </div>
-                            </div>
 
-                            <!-- botao registro do plano -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_plano">
-                                Registrar Plano
-                            </button>
+                                    <!-- corpo do modal -->
+                                    <div class="modal-body">
+                                        <!-- colocar o formulario -->
+                                        <form action="" method="post">
+                                            <!-- form_atleta -->
+                                            {{ form_atleta.csrf_token }}
 
-                            <!-- modal -->
-                            <div class="modal fade" id="cadastro_plano" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <!-- Cabeçalho -->
-                                         <div class="modal-header bg-primary">
-                                            <h5>Faça um Plano...</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                         </div>
+                                            {{ form_atleta.nome.label() }}
+                                            {{ form_atleta.nome(class="form-control")}}
 
-                                        <!-- corpo do modal -->
-                                        <div class="modal-body">
-                                            <!-- colocar formulario -->
-                                        </div>
+                                            {{ form_atleta.posicao.label() }}
+                                            {{ form_atleta.posicao(class="form-control")}}
 
-                                        <!-- rodapé -->
-                                        <div class="modal-footer bg-secondary">
-                                            <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                        </div>
+                                            {{ form_atleta.data_nascimento.label() }}
+                                            {{ form_atleta.data_nascimento(class="form-control")}}
+
+                                            {{ form_atleta.peso_atual.label() }}
+                                            {{ form_atleta.peso_atual(class="form-control")}}
+
+                                            {{ form_atleta.altura.label() }}
+                                            {{ form_atleta.altura(class="form-control")}}
+
+                                            {{ form_atleta.btnsubmit(class="btn btn-primary mt-4 w-100")}}
+                                        </form>
+                                        
+                                    </div>
+
+                                    <!-- rodapé -->
+                                    <div class="modal-footer bg-secondary">
+                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Segunda Coluna (6 unidades de largura) -->
-                        <div class="col-6 d-grid gap-2">
-                            <!-- botao de registrar Exercício -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_exercicio">
-                                Registrar Exercício
-                            </button>
+                        <!-- botao registro do plano -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_plano">
+                            Registrar Plano
+                        </button>
 
-                            <!-- modal -->
-                            <div class="modal fade" id="cadastro_exercicio" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <!-- Cabeçalho -->
+                        <!-- modal -->
+                        <div class="modal fade" id="cadastro_plano" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Cabeçalho -->
                                         <div class="modal-header bg-primary">
-                                            <h5>Registre um Exercício...</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        <h5>Faça um Plano...</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
 
-                                        <!-- corpo do modal -->
-                                        <div class="modal-body">
-                                            <!-- colocar formulario -->
-                                        </div>
+                                    <!-- corpo do modal -->
+                                    <div class="modal-body">
+                                        <!-- colocar formulario -->
+                                        <form action="" method="post">
+                                            <!-- form_planotreino -->
+                                            {{ form_planotreino.csrf_token }}
 
-                                        <!-- rodapé -->
-                                        <div class="modal-footer bg-secondary">
-                                            <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                        </div>
+                                            {{ form_planotreino.nome_plano.label() }}
+                                            {{ form_planotreino.nome_plano(class="form-control")}}
+
+                                            {{ form_planotreino.objetivo.label() }}
+                                            {{ form_planotreino.objetivo(class="form-control")}}
+
+                                            {{ form_planotreino.id_atleta.label() }}
+                                            {{ form_planotreino.id_atleta(class="form-control")}}
+
+                                            {{ form_planotreino.btnsubmit(class="btn btn-primary mt-4 w-100")}}
+
+                                        </form>
+                                    </div>
+
+                                    <!-- rodapé -->
+                                    <div class="modal-footer bg-secondary">
+                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- rota para ver a Evolução -->
-                            <a href="{{ url_for('Evolucao')}}" class="btn btn-primary">Ver Evolução</a>
                         </div>
-
                     </div>
+
+                    <!-- Segunda Coluna (6 unidades de largura) -->
+                    <div class="col-6 d-grid gap-2">
+                        <!-- botao de registrar Exercício -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_exercicio">
+                            Registrar Exercício
+                        </button>
+
+                        <!-- modal -->
+                        <div class="modal fade" id="cadastro_exercicio" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <!-- Cabeçalho -->
+                                    <div class="modal-header bg-primary">
+                                        <h5>Registre um Exercício...</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- corpo do modal -->
+                                    <div class="modal-body">
+                                        <!-- colocar formulario -->
+                                        <form action="" method="post">
+                                            <!-- form_exercicio -->
+                                            {{ form_exercicio.csrf_token }}
+
+                                            {{ form_exercicio.nome_exercicio.label(class="fs-5 fw-bold") }}
+                                            {{ form_exercicio.nome_exercicio(class="form-control mt-2") }}
+
+                                            {{ form_exercicio.categoria.label(class="fs-5 fw-bold") }}
+                                            {{ form_exercicio.categoria(class="form-control mt-2") }}
+
+                                            {{ form_exercicio.btnsubmit(class="btn btn-primary mt-4 w-100")}}
+                                        </form>
+                                    </div>
+
+                                    <!-- rodapé -->
+                                    <div class="modal-footer bg-secondary">
+                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- rota para ver a Evolução -->
+                        <a href="{{ url_for('Evolucao')}}" class="btn btn-primary">Ver Evolução</a>
+                    </div>
+
                 </div>
             </div>
         </div>

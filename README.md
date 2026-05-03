@@ -64,3 +64,14 @@ criando projetos para treinar flask e demonstrar conhecimento
     1. Na pasta templates, vou criar as paginas principais... (futuramente implemento mais)
     2. criar um base.html pra ser o "pai" das outras pastas "filhos"
     3. Criar o "homepage", por padrao a pagina de login
+    4. Extra: Criar pastas para serem herdadas ou reutilizadas. conteudo que se repete muitas vezes
+
+# Formulario
+    1. Colocar ", methods=['GET', 'POST']" em todas as rotas, para aceitar os tipos de requisão.
+    2. instanciar os formularios nas paginas. form = Classe_formulario()
+    3. retornar esses formularios para o front end. no render template, nome_form = variavel_form.
+    4. colocar os formularios nas paginas de cadastro. 
+        a. colocar o token de segurança,  {{ nome_formulario.crsf_token }}
+        b. instanciar cada aba, {{ nome_form.nome_variavel.label()}} -> aqui vem as propriedades e o nome
+        c. instanciar a aba, {{ nome_form.nome_variavel() }} -> aqui vem o "input", estilizar o input com class="form-control", dentro do parenteses
+        d. caso a instancia for um botão, so instanciar ele mesmo, {{ nome_form.nome_variavel(class="")}}, estilizar dentro do class
