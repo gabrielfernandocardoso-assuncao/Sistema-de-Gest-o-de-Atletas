@@ -1,164 +1,155 @@
 {% extends 'base.html' %}
 
-{% block titulo%} Menu {% endblock %}
+{% block titulo %} Menu Principal {% endblock %}
 
 {% block content %}
     {% include 'cabecalho.html' %}
-    
-    <hr>
-    <!-- padrao de toda pagina -->
 
-    <div class="row justify-content-center" >
-        <div class="card mt-5" style="width: 26rem;">
-            <div class="card-body ">
-                <h5 class="card-title text-success text-center">Escolha uma opção:</h5>
-                <!-- A ROW cria a linha. justify-content-center centraliza as colunas se sobrarem espaços -->
-                <div class="row justify-content-center mt-4">
-                    
-                    <!-- Primeira Coluna (6 unidades de largura) -->
-                    <div class="col-6 d-grid gap-2">
-                        <!-- botao para cadastrar Atleta -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro">
-                            Registrar Atleta
-                        </button>
-                        <!-- modal registro de Atleta -->
-                        <div class="modal fade" id="cadastro" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Cabeçalho -->
-                                    <div class="modal-header bg-primary">
-                                        <h5>Cadastre o Atleta...</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
+    <div class="container py-5">
+        <div class="row text-center mb-5">
+            <h2 class="fw-bold text-dark">Painel de Controle</h2>
+            <p class="text-muted">Gerencie atletas, treinos e exercícios em um só lugar</p>
+        </div>
 
-                                    <!-- corpo do modal -->
-                                    <div class="modal-body">
-                                        <!-- colocar o formulario -->
-                                        <form action="" method="post">
-                                            <!-- form_atleta -->
-                                            {{ form_atleta.csrf_token }}
-
-                                            {{ form_atleta.nome.label() }}
-                                            {{ form_atleta.nome(class="form-control")}}
-
-                                            {{ form_atleta.posicao.label() }}
-                                            {{ form_atleta.posicao(class="form-control")}}
-
-                                            {{ form_atleta.data_nascimento.label() }}
-                                            {{ form_atleta.data_nascimento(class="form-control")}}
-
-                                            {{ form_atleta.peso_atual.label() }}
-                                            {{ form_atleta.peso_atual(class="form-control")}}
-
-                                            {{ form_atleta.altura.label() }}
-                                            {{ form_atleta.altura(class="form-control")}}
-
-                                            {{ form_atleta.btnsubmit(class="btn btn-primary mt-4 w-100")}}
-                                        </form>
-                                        
-                                    </div>
-
-                                    <!-- rodapé -->
-                                    <div class="modal-footer bg-secondary">
-                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                    </div>
-                                </div>
-                            </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm border-top border-primary border-4">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-person-plus-fill fs-3 text-primary"></i>
                         </div>
-
-                        <!-- botao registro do plano -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_plano">
-                            Registrar Plano
-                        </button>
-
-                        <!-- modal -->
-                        <div class="modal fade" id="cadastro_plano" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Cabeçalho -->
-                                        <div class="modal-header bg-primary">
-                                        <h5>Faça um Plano...</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-
-                                    <!-- corpo do modal -->
-                                    <div class="modal-body">
-                                        <!-- colocar formulario -->
-                                        <form action="" method="post">
-                                            <!-- form_planotreino -->
-                                            {{ form_planotreino.csrf_token }}
-
-                                            {{ form_planotreino.nome_plano.label() }}
-                                            {{ form_planotreino.nome_plano(class="form-control")}}
-
-                                            {{ form_planotreino.objetivo.label() }}
-                                            {{ form_planotreino.objetivo(class="form-control")}}
-
-                                            {{ form_planotreino.id_atleta.label() }}
-                                            {{ form_planotreino.id_atleta(class="form-control")}}
-
-                                            {{ form_planotreino.btnsubmit(class="btn btn-primary mt-4 w-100")}}
-
-                                        </form>
-                                    </div>
-
-                                    <!-- rodapé -->
-                                    <div class="modal-footer bg-secondary">
-                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h5 class="card-title fw-bold">Atletas</h5>
+                        <p class="card-text text-muted small">Cadastre novos esportistas e gerencie seus dados biométricos.</p>
+                        <button class="btn btn-primary w-100 mt-2" data-bs-toggle="modal" data-bs-target="#modalAtleta">Registrar Atleta</button>
                     </div>
+                </div>
+            </div>
 
-                    <!-- Segunda Coluna (6 unidades de largura) -->
-                    <div class="col-6 d-grid gap-2">
-                        <!-- botao de registrar Exercício -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastro_exercicio">
-                            Registrar Exercício
-                        </button>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm border-top border-info border-4">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-journal-text fs-3 text-info"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Planos</h5>
+                        <p class="card-text text-muted small">Crie e atribua cronogramas de treinamento para seus atletas.</p>
+                        <button class="btn btn-info text-white w-100 mt-2" data-bs-toggle="modal" data-bs-target="#modalPlano">Cadastrar Plano</button>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- modal -->
-                        <div class="modal fade" id="cadastro_exercicio" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- Cabeçalho -->
-                                    <div class="modal-header bg-primary">
-                                        <h5>Registre um Exercício...</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm border-top border-warning border-4">
+                    <div class="card-body text-center p-4">
+                        <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i class="bi bi-activity fs-3 text-warning"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Exercícios</h5>
+                        <p class="card-text text-muted small">Adicione novos movimentos à biblioteca do sistema.</p>
+                        <button class="btn btn-warning text-white w-100 mt-2" data-bs-toggle="modal" data-bs-target="#modalExercicio">Novo Exercício</button>
+                    </div>
+                </div>
+            </div>
 
-                                    <!-- corpo do modal -->
-                                    <div class="modal-body">
-                                        <!-- colocar formulario -->
-                                        <form action="" method="post">
-                                            <!-- form_exercicio -->
-                                            {{ form_exercicio.csrf_token }}
+            <div class="col-md-6 mt-4">
+                <a href="{{ url_for('Evolucao') }}" class="btn btn-dark btn-lg w-100 py-3 shadow-sm">
+                    <i class="bi bi-graph-up-arrow me-2 text-success"></i> Acessar Histórico de Evolução
+                </a>
+            </div>
+        </div>
+    </div>
 
-                                            {{ form_exercicio.nome_exercicio.label(class="fs-5 fw-bold") }}
-                                            {{ form_exercicio.nome_exercicio(class="form-control mt-2") }}
-
-                                            {{ form_exercicio.categoria.label(class="fs-5 fw-bold") }}
-                                            {{ form_exercicio.categoria(class="form-control mt-2") }}
-
-                                            {{ form_exercicio.btnsubmit(class="btn btn-primary mt-4 w-100")}}
-                                        </form>
-                                    </div>
-
-                                    <!-- rodapé -->
-                                    <div class="modal-footer bg-secondary">
-                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                    </div>
-                                </div>
+    <div class="modal fade" id="modalAtleta" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title fw-bold">Novo Atleta</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="" method="post">
+                        {{ form_atleta.csrf_token }}
+                        <div class="mb-3">
+                            {{ form_atleta.nome.label(class="form-label small fw-bold") }}
+                            {{ form_atleta.nome(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_atleta.posicao.label(class="form-label small fw-bold") }}
+                            {{ form_atleta.posicao(class="form-control") }}
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                {{ form_atleta.peso_atual.label(class="form-label small fw-bold") }}
+                                {{ form_atleta.peso_atual(class="form-control") }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_atleta.altura.label(class="form-label small fw-bold") }}
+                                {{ form_atleta.altura(class="form-control") }}
                             </div>
                         </div>
-                        
-                        <!-- rota para ver a Evolução -->
-                        <a href="{{ url_for('Evolucao')}}" class="btn btn-primary">Ver Evolução</a>
-                    </div>
-
+                        <div class="mb-4">
+                            {{ form_atleta.data_nascimento.label(class="form-label small fw-bold") }}
+                            {{ form_atleta.data_nascimento(class="form-control", type="date") }}
+                        </div>
+                        {{ form_atleta.btnsubmit(class="btn btn-primary w-100 py-2") }}
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalPlano" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title fw-bold">Novo Plano de Treino</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="" method="post">
+                        {{ form_planotreino.csrf_token }}
+                        <div class="mb-3">
+                            {{ form_planotreino.nome_plano.label(class="form-label small fw-bold") }}
+                            {{ form_planotreino.nome_plano(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form_planotreino.objetivo.label(class="form-label small fw-bold") }}
+                            {{ form_planotreino.objetivo(class="form-control") }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form_planotreino.id_atleta.label(class="form-label small fw-bold") }}
+                            {{ form_planotreino.id_atleta(class="form-select") }}
+                        </div>
+                        {{ form_planotreino.btnsubmit(class="btn btn-info text-white w-100 py-2") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalExercicio" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title fw-bold">Novo Exercício</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="" method="post">
+                        {{ form_exercicio.csrf_token }}
+                        <div class="mb-3">
+                            {{ form_exercicio.nome_exercicio.label(class="form-label small fw-bold") }}
+                            {{ form_exercicio.nome_exercicio(class="form-control") }}
+                        </div>
+                        <div class="mb-4">
+                            {{ form_exercicio.categoria.label(class="form-label small fw-bold") }}
+                            {{ form_exercicio.categoria(class="form-control") }}
+                        </div>
+                        {{ form_exercicio.btnsubmit(class="btn btn-warning text-white w-100 py-2") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

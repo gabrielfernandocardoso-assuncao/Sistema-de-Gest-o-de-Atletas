@@ -1,98 +1,74 @@
 {% extends 'base.html' %}
 
-{% block titulo%} Menu {% endblock %}
-<!-- {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %} -->
 {% block content %}
     {% include 'cabecalho.html' %}
-    
-    <hr>
-    
-    <div class="row justify-content-center">
-        <div class="card" style="width: 40rem; height: auto;">
-            <div class="card-body" style="background-color: gray;">
-                <!-- nome do usuario -->
-                <h5 class="card-title text-center fs-3">{{ current_user.nome.capitalize() }} {{ current_user.sobrenome.capitalize() }}</h5>
 
-                <hr>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card border-0 shadow-lg overflow-hidden">
+                    <div class="bg-primary py-5"></div>
+                    <div class="card-body text-center position-relative" style="margin-top: -75px;">
+                        <div class="mb-3">
+                            <img src="{{ url_for('static', filename='foto_perfil/' ~ (current_user.foto_perfil or 'default.png')) }}" 
+                                 class="rounded-circle border border-4 border-white shadow-sm" 
+                                 style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
+                        
+                        <h3 class="fw-bold mb-0">{{ current_user.nome.capitalize() }} {{ current_user.sobrenome.capitalize() }}</h3>
+                        <p class="text-muted">{{ current_user.email }}</p>
 
-                <div class="col-12 text-center">
-                    <!-- imagem de perfil do usuario -->
-                    <img src="{{ url_for('static', filename='foto_perfil/' ~ (current_user.foto_perfil or 'default.png')) }}" 
-                        alt="Foto de Perfil" 
-                        class="rounded-circle" 
-                        style="width: 150px;">
-                 </div>
+                        <hr class="my-4 opacity-25">
 
-                <hr>
-
-                <div class="row">
-                    <div class="col-12">
-                        <span class="fs-3">Email: </span>
-                        <input type="text" readonly placeholder="{{ current_user.email }}" class="form-control fs-5">
-                        <button type="button" class="btn btn-primary w-100 mt-4" data-bs-toggle="modal" data-bs-target="#alterar_senha">
-                            Alterar Informações
-                        </button>
-
-                        <!-- modal -->
-                        <div class="modal fade" id="alterar_senha" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <!-- cabeçalho -->
-                                    <div class="modal-header bg-primary">
-                                        <h5>Alterando Crendenciais...</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                    </div>
-
-                                    <!-- corpo do modal -->
-                                    <div class="modal-body">
-                                        <!-- formulario de alteração -->
-                                        <form action="" method="post" enctype="multipart/form-data">
-                                            {{ form.csrf_token }}
-
-                                            <!-- 1 -->
-                                            {{ form.nome.label() }}
-                                            {{ form.nome(class="form-control") }}
-
-                                            <!-- 2 -->
-                                            {{ form.sobrenome.label() }}
-                                            {{ form.sobrenome(class="form-control") }}
-
-                                            <!-- 3 -->
-                                            {{ form.email.label() }}
-                                            {{ form.email(class="form-control") }}
-
-                                            <!-- 4 -->
-                                            {{ form.senha.label() }}
-                                            {{ form.senha(class="form-control") }}
-
-                                            <!-- 5 -->
-                                            {{ form.confirmar_senha.label() }}
-                                            {{ form.confirmar_senha(class="form-control") }}
-
-                                            <!-- 6 -->
-                                            {{ form.foto_perfil.label() }}
-                                            {{ form.foto_perfil(class="form-control") }}
-
-                                            <!-- 7 -->
-                                            {{ form.btnsubmit(class="btn btn-primary mt-4 w-100") }}
-                                        
-                                            
-                                        </form>
-                                    </div>
-                                    <!-- rodapé -->
-                                    <div class="modal-footer bg-secondary">
-                                        <button type="button" class="btn btn-danger col-3" data-bs-dismiss="modal">Fechar</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="d-grid gap-2">
+                            <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#alterar_perfil">
+                                <i class="bi bi-pencil-square me-2"></i>Editar Perfil
+                            </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="alterar_perfil" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white py-3">
+                    <h5 class="modal-title fw-bold">Alterar Credenciais</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        <div class="mb-3">
+                            {{ form.nome.label(class="form-label small fw-bold") }}
+                            {{ form.nome(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.sobrenome.label(class="form-label small fw-bold") }}
+                            {{ form.sobrenome(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label small fw-bold") }}
+                            {{ form.email(class="form-control") }}
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                {{ form.senha.label(class="form-label small fw-bold") }}
+                                {{ form.senha(class="form-control") }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.confirmar_senha.label(class="form-label small fw-bold") }}
+                                {{ form.confirmar_senha(class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            {{ form.foto_perfil.label(class="form-label small fw-bold") }}
+                            {{ form.foto_perfil(class="form-control") }}
+                        </div>
+                        {{ form.btnsubmit(class="btn btn-primary w-100 py-2") }}
+                    </form>
                 </div>
             </div>
         </div>
